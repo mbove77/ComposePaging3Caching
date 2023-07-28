@@ -1,4 +1,4 @@
-package com.plcoding.composepaging3caching.ui.theme
+package com.plcoding.composepaging3caching.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
