@@ -20,6 +20,17 @@ fun BeerDto.toBeerEntity(): BeerEntity {
     )
 }
 
+fun BeerDto.toBeer(): Beer {
+    return Beer(
+        id = id,
+        name = name,
+        tagline = tagline,
+        description = description,
+        firstBrew = first_brewed,
+        imageUrl = image_url
+    )
+}
+
 fun BeerEntity.toBeer(): Beer {
     return Beer(
         id = id,

@@ -10,9 +10,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.plcoding.composepaging3caching.presentation.beerList.BeerListViewModel
 import com.plcoding.composepaging3caching.presentation.navigation.AppNavHost
 import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3CachingTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,10 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    val viewModel = hiltViewModel<BeerListViewModel>()
-                    val beers = viewModel.beerPagingFlow.collectAsLazyPagingItems()
-
-                    AppNavHost(beers = beers)
+                    AppNavHost()
                 }
             }
         }

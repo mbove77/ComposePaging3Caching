@@ -1,16 +1,16 @@
 package com.plcoding.composepaging3caching.presentation.beerDetails
 
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3CachingTheme
 
 /**
  * Created by Martín Bove on 29/07/2023.
@@ -18,19 +18,21 @@ import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3Cachi
  */
 
 @Composable
-fun BeerDetailsScreen(navController: NavHostController, beerId: String? = null) {
-    val context = LocalContext.current
+fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostController) {
+    val beer = viewModel.beer.value
 
-    Text(text = "Se seleciono la cerbeza con id: $beerId",
-        Modifier.fillMaxSize(),
-        textAlign = TextAlign.Center,
+    if (beer != null) {
+        Text(text = "Se seleciono la cerbeza con id: ${beer.name}",
+            Modifier.fillMaxSize(),
+            textAlign = TextAlign.Center,
         )
-}
-
-@Composable
-@Preview
-fun previewBeerDetails() {
-    ComposePaging3CachingTheme {
-        BeerDetailsScreen(rememberNavController())
+    } else {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            CircularProgressIndicator()
+        }
     }
 }
