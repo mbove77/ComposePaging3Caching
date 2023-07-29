@@ -1,6 +1,7 @@
-package com.plcoding.composepaging3caching.presentation
+package com.plcoding.composepaging3caching.presentation.beerList
 
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -25,22 +27,24 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.plcoding.composepaging3caching.R
 import com.plcoding.composepaging3caching.domain.model.Beer
-import com.plcoding.composepaging3caching.presentation.ui.theme.ComposePaging3CachingTheme
+import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3CachingTheme
 
 /**
  * Created by Martín Bove on 28/07/2023.
  * E-mail: mbove77@gmail.com
  */
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BeerItem(
     beer: Beer,
     modifier: Modifier = Modifier,
+    selectBeerClick: (Int)->Unit
 ) {
     Card(
         modifier = modifier,
         elevation = 4.dp,
-
+        onClick = { selectBeerClick(beer.id) }
     ) {
         Row(
             modifier = Modifier
@@ -95,7 +99,8 @@ fun BeerItem(
 
 }
 
-@Preview
+@Preview(showBackground = true, name = "Light Theme")
+@Preview(showBackground = true, name = "Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun BeerItemPreview() {
     ComposePaging3CachingTheme {
@@ -108,7 +113,8 @@ fun BeerItemPreview() {
                 "Esta es la descripcion de la cerbeza \n " +
                         "Segunda linea de la descripcion de la cerbeza.",
                 null
-            )
+            ),
+            selectBeerClick = {}
         )
     }
 }

@@ -1,4 +1,4 @@
-package com.plcoding.composepaging3caching.presentation
+package com.plcoding.composepaging3caching.presentation.beerList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +17,7 @@ import javax.inject.Inject
  */
 
 @HiltViewModel
-class BeerViewModel @Inject constructor(
+class BeerListViewModel @Inject constructor(
     pager: Pager<Int, BeerEntity>
 ): ViewModel() {
 
