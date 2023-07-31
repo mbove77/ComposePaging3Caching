@@ -12,10 +12,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,9 +24,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.plcoding.composepaging3caching.R
 import com.plcoding.composepaging3caching.domain.model.Beer
 import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3CachingTheme
 
@@ -34,7 +33,7 @@ import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3Cachi
  * E-mail: mbove77@gmail.com
  */
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BeerItem(
     beer: Beer,
@@ -43,7 +42,9 @@ fun BeerItem(
 ) {
     Card(
         modifier = modifier,
-        elevation = 4.dp,
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 4.dp
+        ),
         onClick = { selectBeerClick(beer.id) }
     ) {
         Row(
@@ -71,19 +72,21 @@ fun BeerItem(
             ) {
                 Text(
                     text = beer.name,
-                    style = MaterialTheme.typography.h6,
+                    style = MaterialTheme.typography.headlineMedium,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = beer.tagline,
+                    style = MaterialTheme.typography.titleMedium,
                     fontStyle = FontStyle.Italic,
-                    color = Color(R.color.text_grey),
+                    color = Color.Gray,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = beer.description,
+                    style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -91,7 +94,7 @@ fun BeerItem(
                     text = "Cosecha ${beer.firstBrew}",
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.End,
-                    fontSize = 9.sp
+                    style = MaterialTheme.typography.labelSmall,
                 )
             }
         }

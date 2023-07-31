@@ -1,16 +1,25 @@
 package com.plcoding.composepaging3caching.presentation.beerDetails
 
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
+import com.plcoding.composepaging3caching.domain.model.Beer
+import com.plcoding.composepaging3caching.presentation.beerDetails.components.BeerDetailsCard
+import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3CachingTheme
 
 /**
  * Created by Martín Bove on 29/07/2023.
@@ -22,10 +31,19 @@ fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostCon
     val beer = viewModel.beer.value
 
     if (beer != null) {
-        Text(text = "Se seleciono la cerbeza con id: ${beer.name}",
-            Modifier.fillMaxSize(),
-            textAlign = TextAlign.Center,
-        )
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)) {
+            AsyncImage(
+                model = beer.imageUrl,
+                contentDescription = null,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .alpha(0.5f)
+            )
+
+            BeerDetailsCard(beer = beer)
+        }
     } else {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -33,6 +51,25 @@ fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostCon
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             CircularProgressIndicator()
+        }
+    }
+}
+
+@Preview(showBackground = true, name = "Light Theme")
+@Preview(showBackground = true, name = "Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun BeerItemPreview() {
+    ComposePaging3CachingTheme {
+        Surface(modifier = Modifier.fillMaxSize()) {
+            BeerDetailsCard(beer = Beer(
+                1,
+                "Cebeza Negra",
+                "Una buena Cerbeza",
+                "03/2022",
+                "Esta es la descripcion de la cerbeza \n " +
+                        "Segunda linea de la descripcion de la cerbeza.",
+                null
+            ))
         }
     }
 }
