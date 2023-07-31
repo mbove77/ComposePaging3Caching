@@ -19,7 +19,7 @@ interface BeerApi {
     @GET("beers/{beer_id}")
     suspend fun getBeer(
         @Path("beer_id") beerId: Int,
-    ):  List<BeerDto>
+    ):  List<BeerDetailsDto>
 
     companion object {
         const val BASE_URL = "https://api.punkapi.com/v2/"

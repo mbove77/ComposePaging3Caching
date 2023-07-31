@@ -115,6 +115,7 @@ fun BeerItemPreview() {
                 "03/2022",
                 "Esta es la descripcion de la cerbeza \n " +
                         "Segunda linea de la descripcion de la cerbeza.",
+                null,
                 null
             ),
             selectBeerClick = {}

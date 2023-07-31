@@ -19,6 +19,7 @@ import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.plcoding.composepaging3caching.domain.model.Beer
 import com.plcoding.composepaging3caching.presentation.beerDetails.components.BeerDetailsCard
+import com.plcoding.composepaging3caching.presentation.beerList.BeerItem
 import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3CachingTheme
 
 /**
@@ -42,7 +43,7 @@ fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostCon
                     .alpha(0.5f)
             )
 
-            BeerDetailsCard(beer = beer)
+            BeerItem(beer = beer, selectBeerClick = {})
         }
     } else {
         Column(
@@ -68,6 +69,7 @@ fun BeerItemPreview() {
                 "03/2022",
                 "Esta es la descripcion de la cerbeza \n " +
                         "Segunda linea de la descripcion de la cerbeza.",
+                null,
                 null
             ))
         }
