@@ -14,12 +14,12 @@ data class BeerDetailsDto(
     val image_url: String?,
     val food_pairing: List<String>,
     val brewers_tips: String,
-    val abv: Float,
-    val ibu: Float,
-    val target_fg: Float,
-    val target_og: Float,
-    val ebc: Float,
-    val srm: Float,
-    val ph: Float,
-    val attenuation_level: Float
+    val abv: Float?,
+    val ibu: Float?,
+    val target_fg: Float?,
+    val target_og: Float?,
+    val ebc: Float?,
+    val srm: Float?,
+    val ph: Float?,
+    val attenuation_level: Float?
 )

@@ -1,26 +1,35 @@
 package com.plcoding.composepaging3caching.presentation.beerDetails
 
 
-import android.content.res.Configuration
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
-import com.plcoding.composepaging3caching.domain.model.Beer
-import com.plcoding.composepaging3caching.presentation.beerDetails.components.BeerDetailsCard
-import com.plcoding.composepaging3caching.presentation.beerList.BeerItem
-import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3CachingTheme
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import com.plcoding.composepaging3caching.presentation.beerDetails.components.BeerDetailsInfoGrid
+import com.plcoding.composepaging3caching.presentation.beerDetails.components.FoodParingList
+import com.plcoding.composepaging3caching.presentation.utils.RotateImgTransformation
 
 /**
  * Created by Martín Bove on 29/07/2023.
@@ -32,19 +41,72 @@ fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostCon
     val beer = viewModel.beer.value
 
     if (beer != null) {
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)) {
-            AsyncImage(
-                model = beer.imageUrl,
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .alpha(0.5f)
+
+        val painter =
+            rememberAsyncImagePainter(
+                ImageRequest.Builder(LocalContext.current).data(data = beer.imageUrl).apply(
+                    block = fun ImageRequest.Builder.() {
+                    transformations(
+                        RotateImgTransformation(-90f, beer.name),
+                    )
+                }).build()
             )
 
-            BeerItem(beer = beer, selectBeerClick = {})
+        Column(
+            Modifier.padding(16.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            Card(
+                Modifier
+                    .fillMaxWidth(),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 4.dp
+                ),
+
+                ) {
+                Column(Modifier.padding(16.dp)) {
+                    Image(
+                        painter = painter,
+                        contentDescription = null,
+                        contentScale = ContentScale.FillWidth,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(130.dp)
+                            .padding(0.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = beer.name,
+                        style = MaterialTheme.typography.headlineSmall
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = beer.tagline,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontStyle = FontStyle.Italic,
+                        color = Color.Gray,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = beer.description,
+                        style = MaterialTheme.typography.bodyMedium,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                }
+            }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            beer.beerDetails?.let { FoodParingList(foodParingList = it.foodPairing) }
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            beer.beerDetails?.let { BeerDetailsInfoGrid(beerDetails = it) }
         }
+
     } else {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -56,22 +118,3 @@ fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostCon
     }
 }
 
-@Preview(showBackground = true, name = "Light Theme")
-@Preview(showBackground = true, name = "Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun BeerItemPreview() {
-    ComposePaging3CachingTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            BeerDetailsCard(beer = Beer(
-                1,
-                "Cebeza Negra",
-                "Una buena Cerbeza",
-                "03/2022",
-                "Esta es la descripcion de la cerbeza \n " +
-                        "Segunda linea de la descripcion de la cerbeza.",
-                null,
-                null
-            ))
-        }
-    }
-}

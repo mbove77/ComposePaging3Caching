@@ -7,13 +7,13 @@ package com.plcoding.composepaging3caching.domain.model
 
 data class BeerDetails(
     val foodPairing: List<String>,
-    val brewersTips: String,
-    val abv: Float,
-    val ibu: Float,
-    val targetFg: Float,
-    val targetOg: Float,
-    val ebc: Float,
-    val srm: Float,
-    val ph: Float,
-    val attenuationLevel: Float
+    val brewersTips: String?,
+    val abv: Float?,
+    val ibu: Float?,
+    val targetFg: Float?,
+    val targetOg: Float?,
+    val ebc: Float?,
+    val srm: Float?,
+    val ph: Float?,
+    val attenuationLevel: Float?
 )
