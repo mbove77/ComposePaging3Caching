@@ -8,7 +8,6 @@ import androidx.room.withTransaction
 import com.plcoding.composepaging3caching.data.local.BeerDatabase
 import com.plcoding.composepaging3caching.data.local.BeerEntity
 import com.plcoding.composepaging3caching.data.mappers.toBeerEntity
-import kotlinx.coroutines.delay
 import okio.IOException
 import retrofit2.HttpException
 
@@ -40,7 +39,6 @@ class BeerRemoteMediator(private val beerDB: BeerDatabase, private val beerApi: 
                 }
             }
 
-            delay(2000L)
             val beers = beerApi.getBeers(loadKey, state.config.pageSize)
 
             beerDB.withTransaction {

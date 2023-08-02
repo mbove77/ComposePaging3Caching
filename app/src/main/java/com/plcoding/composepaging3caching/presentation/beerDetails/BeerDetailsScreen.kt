@@ -1,6 +1,7 @@
 package com.plcoding.composepaging3caching.presentation.beerDetails
 
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +15,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.plcoding.composepaging3caching.presentation.beerDetails.components.BeerCard
@@ -29,9 +31,10 @@ import com.plcoding.composepaging3caching.presentation.beerDetails.components.Fo
 
 @Composable
 fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostController) {
-    val beer = viewModel.beer.value
+    val state = viewModel.state
+    val context = LocalContext.current
 
-    if (beer != null) {
+    if (state.beerData != null) {
         Column(
             Modifier
                 .fillMaxWidth()
@@ -39,29 +42,30 @@ fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostCon
                 .verticalScroll(rememberScrollState())
         ) {
 
-            BeerDetailsMainInfo(beer = beer)
+            BeerDetailsMainInfo(beer = state.beerData)
             Spacer(modifier = Modifier.height(24.dp))
 
-            beer.beerDetails?.let { beerDetail ->
-                BeerCard(tittle = "Food parings", content = {
-                    FoodParingList(foodParingList = beerDetail.foodPairing)
-                })
-                Spacer(modifier = Modifier.height(24.dp))
-            }
-
-            beer.beerDetails?.brewersTips?.let { brewerTip ->
+            state.beerData.beerDetails?.brewersTips?.let { brewerTip ->
                 BeerCard(tittle = "Brewers Tips", content = {
                     BrewersTips(tip = brewerTip)
                 })
                 Spacer(modifier = Modifier.height(24.dp))
             }
 
-            beer.beerDetails?.let { beerDetail ->
+            state.beerData.beerDetails?.let { beerDetail ->
+                BeerCard(tittle = "Food parings", content = {
+                    FoodParingList(foodParingList = beerDetail.foodPairing)
+                })
+                Spacer(modifier = Modifier.height(24.dp))
+            }
+
+            state.beerData.beerDetails?.let { beerDetail ->
                 BeerDetailsInfoGrid("Beer information", beerDetails = beerDetail)
             }
         }
+    }
 
-    } else {
+    if (state.isLoading) {
         Column(
             Modifier
                 .fillMaxSize()
@@ -71,6 +75,14 @@ fun BeerDetailsScreen(viewModel: BeerDetailsViewModel, navController: NavHostCon
         ) {
             CircularProgressIndicator()
         }
+    }
+
+    if (state.error != null) {
+        Toast.makeText(
+            context,
+            state.error,
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
 

@@ -84,8 +84,9 @@ fun BeerItem(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "First Brew: ${beer.firstBrew}",
+                    text = "First brew: ${beer.firstBrew}",
                     style = MaterialTheme.typography.labelMedium,
+                    fontStyle = FontStyle.Italic,
                     modifier = Modifier.fillMaxWidth()
                 )
             }
