@@ -21,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -67,7 +66,7 @@ fun BeerItem(
                 modifier = Modifier
                     .weight(3f)
                     .fillMaxHeight(),
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Top
 
             ) {
                 Text(
@@ -83,18 +82,11 @@ fun BeerItem(
                     color = Color.Gray,
                     modifier = Modifier.fillMaxWidth()
                 )
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = beer.description,
-                    style = MaterialTheme.typography.bodyMedium,
+                    text = "First Brew: ${beer.firstBrew}",
+                    style = MaterialTheme.typography.labelMedium,
                     modifier = Modifier.fillMaxWidth()
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Cosecha ${beer.firstBrew}",
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.End,
-                    style = MaterialTheme.typography.labelSmall,
                 )
             }
         }

@@ -33,10 +33,10 @@ import com.plcoding.composepaging3caching.presentation.theme.ComposePaging3Cachi
  */
 
 @Composable
-fun BeerDetailsInfoGrid(beerDetails: BeerDetails) {
+fun BeerDetailsInfoGrid(tittle: String, beerDetails: BeerDetails) {
     Column {
         Text(
-            text = "Beer information",
+            text = tittle,
             style = MaterialTheme.typography.titleLarge
         )
 
@@ -104,7 +104,7 @@ fun InfoItem(name: String, value: Any?) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = value?.toString() ?: "n/a" ,
+                text = value?.toString() ?: "n/a",
                 style = MaterialTheme.typography.bodyMedium,
                 fontStyle = FontStyle.Italic,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -119,7 +119,7 @@ fun InfoItem(name: String, value: Any?) {
 fun BeerDetailsInfoGridPreview() {
     ComposePaging3CachingTheme {
         BeerDetailsInfoGrid(
-
+            "Beer information",
             BeerDetails(
                 listOf(
                     "Primera opcion de comida",
