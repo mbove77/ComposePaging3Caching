@@ -31,13 +31,13 @@ fun BeerListScreen(
     navController: NavHostController
 ) {
     val context = LocalContext.current
-    val beers = viewModel.beerPagingFlow.collectAsLazyPagingItems()
+    val state = viewModel.beerPagingFlow.collectAsLazyPagingItems()
 
-    LaunchedEffect(key1 = beers.loadState) {
-        if (beers.loadState.refresh is LoadState.Error) {
+    LaunchedEffect(key1 = state.loadState) {
+        if (state.loadState.refresh is LoadState.Error) {
             Toast.makeText(
                 context,
-                "Error" + (beers.loadState.refresh as LoadState.Error).error.message,
+                "Error" + (state.loadState.refresh as LoadState.Error).error.message,
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -46,7 +46,7 @@ fun BeerListScreen(
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        if (beers.loadState.refresh is LoadState.Loading) {
+        if (state.loadState.refresh is LoadState.Loading) {
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center)
             )
@@ -56,7 +56,7 @@ fun BeerListScreen(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                items(beers) {beer ->
+                items(state) { beer ->
                     if (beer != null) {
                         BeerItem(
                             beer = beer,
@@ -68,7 +68,7 @@ fun BeerListScreen(
                     }
                 }
                 item {
-                    if (beers.loadState.append is LoadState.Loading) {
+                    if (state.loadState.append is LoadState.Loading) {
                         CircularProgressIndicator()
                     }
                 }

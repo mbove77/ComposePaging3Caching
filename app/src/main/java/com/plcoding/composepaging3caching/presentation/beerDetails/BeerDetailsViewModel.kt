@@ -10,6 +10,7 @@ import com.plcoding.composepaging3caching.data.mappers.toBeer
 import com.plcoding.composepaging3caching.data.remote.BeerApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.HttpException
@@ -35,6 +36,7 @@ class BeerDetailsViewModel @Inject constructor(private val beerApi: BeerApi) : V
             )
 
             try {
+                delay(300)
                 val result = beerApi.getBeer(beerId.toInt())
 
                 state = state.copy(
