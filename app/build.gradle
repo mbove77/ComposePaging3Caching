@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.plcoding.composepaging3caching'
+    namespace 'com.martinbove.paging3compose'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.plcoding.composepaging3caching"
+        applicationId "com.martinbove.paging3compose"
         minSdk 24
         targetSdk 33
         versionCode 1
