@@ -25,7 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.martinbove.paging3compose.domain.model.Beer
-import com.martinbove.paging3compose.presentation.theme.ComposePaging3CachingTheme
+import com.martinbove.paging3compose.presentation.theme.AppTheme
+
 
 /**
  * Created by Martín Bove on 28/07/2023.
@@ -99,7 +100,7 @@ fun BeerItem(
 @Preview(showBackground = true, name = "Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun BeerItemPreview() {
-    ComposePaging3CachingTheme {
+    AppTheme {
         BeerItem(
             Beer(
                 1,

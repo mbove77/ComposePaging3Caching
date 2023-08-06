@@ -25,7 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.martinbove.paging3compose.domain.model.BeerDetails
-import com.martinbove.paging3compose.presentation.theme.ComposePaging3CachingTheme
+import com.martinbove.paging3compose.presentation.theme.AppTheme
 
 /**
  * Created by Martín Bove on 01/08/2023.
@@ -117,7 +117,7 @@ fun InfoItem(name: String, value: Any?) {
 @Preview(showBackground = true, name = "Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun BeerDetailsInfoGridPreview() {
-    ComposePaging3CachingTheme {
+    AppTheme {
         BeerDetailsInfoGrid(
             "Beer information",
             BeerDetails(

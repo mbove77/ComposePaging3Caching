@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.ComposePaging3Caching" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="android:statusBarColor">@color/primary_app</item>
     </style>
 </resources>

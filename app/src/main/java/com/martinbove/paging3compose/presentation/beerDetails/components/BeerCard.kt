@@ -13,7 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.martinbove.paging3compose.presentation.theme.ComposePaging3CachingTheme
+import com.martinbove.paging3compose.presentation.theme.AppTheme
+
 
 /**
  * Created by Martín Bove on 02/08/2023.
@@ -45,7 +46,7 @@ fun BeerCard(tittle: String, content: @Composable () -> Unit) {
 @Preview(showBackground = true, name = "Dark Theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun BeerCardPreview() {
-    ComposePaging3CachingTheme {
+    AppTheme {
         BeerCard("Primera opcion de comida", { BrewersTips(tip = "esto es un tip muy loco")} )
     }
 }
