@@ -1,5 +1,11 @@
 # Compose + Paging 3 + RoomDb cache.
-Esta demo app es con fines de aprendizaje, en ella se exploran las librerías
+Esta demo app es con fines de aprendizaje, en ella se exploran las librerías:
+
+* Jetpack Compose
+* Material 3 with dynamics colors
+* Paging 3 Library
+* Room DB
+
 
 #### Capturas de pantalla
 <p>
